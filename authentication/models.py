@@ -41,7 +41,11 @@ class CRMUser(AbstractUser):
 
     team = models.SmallIntegerField(choices=TEAM_CHOICES, null=False)
 
+    @property
+    def full_name(self):
+        return f"{self.first_name} {self.last_name.upper()}"
+
     def __str__(self):
         if self.first_name == "" and self.last_name == "":
             return self.username
-        return f"{self.first_name} {self.last_name.upper()}"
+        return self.full_name

@@ -1,5 +1,3 @@
-from pprint import pprint
-
 from django.contrib import admin
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -35,6 +33,18 @@ class Client(CRMObject):
         Sales Contact	FOREIGN KEY - INT	12
         """
 
+    class Meta:
+        constraints = [
+            models.CheckConstraint(check=models.Q(email__isnull=False) |
+                                         models.Q(phone__isnull=False) |
+                                         models.Q(mobile__isnull=False),
+                                   name='one contact',
+                                   violation_error_message='You must add '
+                                                           'a phone, '
+                                                           'a mobile or '
+                                                           'a mail.'),
+        ]
+
     POTENTIAL = "Potential"
     CONFIRMED = "Confirmed"
 
@@ -55,14 +65,22 @@ class Client(CRMObject):
                                  blank=True,
                                  limit_choices_to={'team': CRMUser.SALES})
 
+    def is_related(self, user: CRMUser) -> bool:
+        return user == self.assignee
+
     @property
     def is_confirmed(self) -> bool:
         return self.contract_set.exists()
 
-    def clean(self):
-        if all(test is None for test in [self.email, self.phone, self.mobile]):
-            raise ValidationError(
-                _('You should enter at least one contact.'))
+    # def clean(self):
+    #     if all(test is None for test in [self.email, self.phone, self.mobile]):
+    #         raise ValidationError({'email': _('You should enter at least '
+    #                                           'one contact.'),
+    #                                'phone': _('You should enter at least '
+    #                                           'one contact.'),
+    #                                'mobile': _('You should enter at least '
+    #                                            'one contact.'),
+    #                                })
 
     def __str__(self):
         return f"{self.first_name} {self.last_name.upper()}"
@@ -104,6 +122,20 @@ class Contract(CRMObject):
                                        blank=True,
                                        null=True)
 
+    class Meta:
+        constraints = [
+            models.CheckConstraint(check=(models.Q(status=1) &
+                                          models.Q(
+                                              payment_due__isnull=False)) |
+                                         (models.Q(status=0) &
+                                          models.Q(payment_due__isnull=True)),
+                                   name='date of payment when signed',
+                                   violation_error_message='A contract '
+                                                           'must have '
+                                                           'a date of payment '
+                                                           'only once signed'),
+        ]
+
     def clean(self):
         if self.status == self.Status.SIGNED and self.payment_due is None:
             raise ValidationError(
@@ -111,12 +143,15 @@ class Contract(CRMObject):
                   ' you have to determine a date of payment.'))
         if self.status != self.Status.SIGNED and self.payment_due is not None:
             raise ValidationError(
-                _('You can determine a date of payment,'
+                _('You can\'t determine a date of payment,'
                   'if contract have not been signed.'))
 
     def save(self, **kwargs):
         self.assignee = self.client.assignee
         super().save(**kwargs)
+
+    def is_related(self, user: CRMUser) -> bool:
+        return user == self.client.assignee
 
     def __str__(self):
         return f"{self.id}-{self.client}"
@@ -163,6 +198,11 @@ class Event(models.Model):
                                     null=True, blank=True, default=None)
     date = models.DateField(verbose_name="Date")
     notes = models.TextField(verbose_name="Notes", blank=True, default="")
+
+    objects = models.Manager()  # Only useful for pycharm developing
+
+    def is_related(self, user: CRMUser) -> bool:
+        return user == self.assignee or self.contract.is_related(user)
 
     @admin.display(ordering='date')
     def __str__(self):
