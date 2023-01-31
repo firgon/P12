@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -51,7 +52,7 @@ class Client(CRMObject):
     first_name = models.CharField(verbose_name="First Name", max_length=25)
     last_name = models.CharField(verbose_name="Last Name", max_length=25)
     email = models.CharField(verbose_name="Email", max_length=100, null=True,
-                             blank=True, )
+                             blank=True, validators=[validate_email])
     phone = models.CharField(verbose_name="Phone", max_length=20,
                              null=True,
                              blank=True, )
@@ -60,7 +61,7 @@ class Client(CRMObject):
                               blank=True, )
     company = models.CharField(verbose_name="Company", max_length=250)
     assignee = models.ForeignKey(to=CRMUser,
-                                 on_delete=models.DO_NOTHING,
+                                 on_delete=models.SET_NULL,
                                  null=True,
                                  blank=True,
                                  limit_choices_to={'team': CRMUser.SALES})
@@ -100,27 +101,25 @@ class Contract(CRMObject):
     """
 
     class Status(models.IntegerChoices):
-        CREATED = 0
-        SIGNED = 1
-        PAYED = 2
-
-    # STATUS_NAME = ["Créé", "Signé", "Payé"]
+        CREATED = 0, 'Created'
+        SIGNED = 1, 'Signed'
+        PAYED = 2, 'Paid'
 
     client = models.ForeignKey(to=Client,
-                               on_delete=models.DO_NOTHING,
+                               on_delete=models.CASCADE,
                                limit_choices_to={'assignee__isnull': False})
     assignee = models.ForeignKey(to=CRMUser,
-                                 on_delete=models.DO_NOTHING,
+                                 on_delete=models.CASCADE,
                                  limit_choices_to={'team': CRMUser.SALES})
     status = models.IntegerField(choices=Status.choices,
                                  verbose_name="Status",
                                  default=Status.CREATED)
-    amount = models.DecimalField(verbose_name="Montant",
+    amount = models.DecimalField(verbose_name="Amount",
                                  decimal_places=2,
                                  max_digits=8)
-    payment_due = models.DateTimeField(verbose_name="Due on",
-                                       blank=True,
-                                       null=True)
+    payment_due = models.DateField(verbose_name="Due on",
+                                   blank=True,
+                                   null=True)
 
     class Meta:
         constraints = [
@@ -137,6 +136,7 @@ class Contract(CRMObject):
         ]
 
     def clean(self):
+        """to clean form from Admin"""
         if self.status == self.Status.SIGNED and self.payment_due is None:
             raise ValidationError(
                 _('When a contact is signed,'
@@ -147,8 +147,15 @@ class Contract(CRMObject):
                   'if contract have not been signed.'))
 
     def save(self, **kwargs):
-        self.assignee = self.client.assignee
+        if not hasattr(self, 'assignee'):
+            self.assignee = self.client.assignee
+
         super().save(**kwargs)
+
+        if self.status >= Contract.Status.SIGNED \
+                and not hasattr(self, 'event'):
+            event = Event.objects.create(contract=self,
+                                         date=self.payment_due)
 
     def is_related(self, user: CRMUser) -> bool:
         return user == self.client.assignee
@@ -157,7 +164,7 @@ class Contract(CRMObject):
         return f"{self.id}-{self.client}"
 
 
-class Event(models.Model):
+class Event(CRMObject):
     """Class to instance Event that are created when a Client contract with us
     Exemple of data that must be stored :
     Id	PRIMARY KEY - INT	1054
@@ -186,12 +193,12 @@ class Event(models.Model):
                                         'event__isnull': True
                                     })
     assignee = models.ForeignKey(to=CRMUser,
-                                 on_delete=models.DO_NOTHING,
+                                 on_delete=models.SET_NULL,
                                  limit_choices_to={
                                      'team': CRMUser.SUPPORT},
                                  null=True,
                                  blank=True)
-    status = models.IntegerField(verbose_name="Statut",
+    status = models.IntegerField(verbose_name="Status",
                                  choices=Status.choices,
                                  default=Status.ON_GOING)
     attendees = models.IntegerField(verbose_name="Expected attendees",
@@ -207,3 +214,9 @@ class Event(models.Model):
     @admin.display(ordering='date')
     def __str__(self):
         return f"{self.date} - {self.contract.client}"
+
+    def clean(self):
+        """to clean form from Admin"""
+        print(self.__dict__)
+
+

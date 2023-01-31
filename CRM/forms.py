@@ -9,6 +9,7 @@ class AddContractForm(ModelForm):
         fields = [
             'client',
             'amount',
+            'status',
             'payment_due'
         ]
         help_texts = {
@@ -16,16 +17,12 @@ class AddContractForm(ModelForm):
         }
 
 
-class AddEventForm(ModelForm):
+class ChangeEventForm(ModelForm):
     class Meta:
         model = Event
         fields = [
-            'contract',
             'assignee',
             'attendees',
             'date',
             'notes'
         ]
-        help_texts = {
-            'contract': 'Contract must have been signed and have no event yet',
-        }

@@ -29,6 +29,5 @@ class EpicEventsMiddleware:
                               f"{request.POST or request.GET} "                              
                               f"{request.user} "
                               f"{request.environ['REMOTE_ADDR']}")
-            self.logger.error()
 
         return response

@@ -1,9 +1,10 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
+from django_filters import filters
 
 
 class ClientConfirmedListFilter(admin.SimpleListFilter):
-    """filter confirmed client and potential client"""
+    """filter confirmed client and potential client on Admin"""
     title = _('Status')
 
     # Parameter for the filter that will be used in the URL query.

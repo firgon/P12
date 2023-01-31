@@ -18,17 +18,16 @@ from django.urls import path, include
 from rest_framework import routers
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from CRM.views import ClientViewSet, ContractViewSet, EventViewSet, \
-    MyClientViewSet, MyEventViewSet, MyContractViewSet
+from CRM.views import ClientViewSet, ContractViewSet, EventViewSet
 from epic_events.admin import admin_site
 
 router = routers.SimpleRouter()
 router.register('clients', ClientViewSet, basename='clients')
-router.register('my-clients', MyClientViewSet, basename='my-clients')
+# router.register('my-clients', MyClientViewSet, basename='my-clients')
 router.register('contracts', ContractViewSet, basename='contracts')
-router.register('my-contracts', MyContractViewSet, basename='my-contracts')
+# router.register('my-contracts', MyContractViewSet, basename='my-contracts')
 router.register('events', EventViewSet, basename='events')
-router.register('my-events', MyEventViewSet, basename='my-events')
+# router.register('my-events', MyEventViewSet, basename='my-events')
 
 urlpatterns = [
     path('admin-tech/', admin.site.urls),

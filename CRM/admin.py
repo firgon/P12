@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.admin import ModelAdmin
 
 from CRM.filters import ClientConfirmedListFilter
-from CRM.forms import AddContractForm, AddEventForm
+from CRM.forms import AddContractForm, ChangeEventForm
 from CRM.models import Contract, Event, Client
 from epic_events.admin import admin_site
 
@@ -56,7 +56,7 @@ class AdminEvent(ModelAdmin):
 
     empty_value_display = 'To Assign !!!'
     list_display_links = ('event', 'assignee',)
-    add_form = AddEventForm
+    change_form = ChangeEventForm
 
     def event(self, obj):
         return str(obj)
@@ -64,11 +64,12 @@ class AdminEvent(ModelAdmin):
     event.admin_order_field = 'date'
     event.short_description = 'Event'
 
+    def has_add_permission(self, request, obj=None):
+        return False
+
     def get_form(self, request, obj=None, change=False, **kwargs):
         """use custom Form when adding new contract"""
-        default = {}
-        if obj is None:
-            default['form'] = self.add_form
+        default = {'form': self.change_form}
         default.update(**kwargs)
         return super().get_form(request, obj, change, **default)
 
