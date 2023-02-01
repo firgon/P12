@@ -121,7 +121,7 @@ class ListContractSerializer(EpicEventModelSerializer):
     status = serializers.CharField(source='get_status_display')
     client = serializers.SlugRelatedField(
         read_only=True,
-        slug_field='company'
+        slug_field='last_name'
     )
 
     class Meta:

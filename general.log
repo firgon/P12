@@ -1,0 +1,77 @@
+WARNING 2023-01-26 13:38:31,860 middleware POST /clients/ 403 Forbidden Christophe SUPPORT 127.0.0.1
+WARNING 2023-01-26 13:38:38,368 middleware PATCH /clients/null/ 403 Forbidden Christophe SUPPORT 127.0.0.1
+WARNING 2023-01-26 13:38:42,310 middleware GET /clients/null/ 404 Not Found Christophe SUPPORT 127.0.0.1
+WARNING 2023-01-26 13:44:27,644 middleware GET /favicon.ico 404 Not Found Emmanuel ALBISSER 127.0.0.1
+WARNING 2023-01-26 13:45:36,838 middleware POST /admin/CRM/client/ 302 Found Emmanuel ALBISSER 127.0.0.1
+WARNING 2023-01-26 13:46:02,889 middleware POST /admin/CRM/client/add/ 302 Found Emmanuel ALBISSER 127.0.0.1
+WARNING 2023-01-26 13:46:15,392 middleware POST /admin/CRM/client/ 302 Found Emmanuel ALBISSER 127.0.0.1
+WARNING 2023-01-26 14:10:19,145 middleware PATCH /my-event/6/ 404 Not Found AnonymousUser 127.0.0.1
+WARNING 2023-01-26 14:11:40,775 middleware POST /contracts/ 403 Forbidden Christophe SUPPORT 127.0.0.1
+WARNING 2023-01-26 14:11:49,118 middleware PATCH /contracts/7/ 403 Forbidden Christophe SUPPORT 127.0.0.1
+ERROR 2023-01-26 14:41:19,920 middleware GET /clients/4/ 500 Internal Server Error <QueryDict: {}> AnonymousUser 127.0.0.1
+ERROR 2023-01-26 14:46:05,161 middleware GET /clients/4/ 500 Internal Server Error <QueryDict: {}> AnonymousUser 127.0.0.1
+ERROR 2023-01-26 14:47:14,894 middleware GET /clients/4/ 500 Internal Server Error <QueryDict: {}> AnonymousUser 127.0.0.1
+ERROR 2023-01-26 14:48:09,756 middleware GET /clients/4/ 500 Internal Server Error <QueryDict: {}> AnonymousUser 127.0.0.1
+ERROR 2023-01-26 14:48:38,086 middleware GET /clients/4/ 500 Internal Server Error <QueryDict: {}> AnonymousUser 127.0.0.1
+ERROR 2023-01-26 14:48:42,150 middleware POST /login/ 500 Internal Server Error <QueryDict: {'username': ['Chris'], 'password': ['testChris']}> AnonymousUser 127.0.0.1
+ERROR 2023-01-26 14:49:53,760 middleware GET /clients/4/ 500 Internal Server Error <QueryDict: {}> Christophe SUPPORT 127.0.0.1
+ERROR 2023-01-26 14:51:23,887 middleware GET /clients/4/ 500 Internal Server Error <QueryDict: {}> Christophe SUPPORT 127.0.0.1
+ERROR 2023-01-26 14:52:11,139 middleware GET /clients/4/ 500 Internal Server Error <QueryDict: {}> Christophe SUPPORT 127.0.0.1
+ERROR 2023-01-26 14:56:42,749 middleware GET /clients/4/ 500 Internal Server Error <QueryDict: {}> Christophe SUPPORT 127.0.0.1
+ERROR 2023-01-26 14:56:57,919 middleware GET /clients/4/ 500 Internal Server Error <QueryDict: {}> Christophe SUPPORT 127.0.0.1
+ERROR 2023-01-26 14:57:48,230 middleware GET /clients/4/ 500 Internal Server Error <QueryDict: {}> Christophe SUPPORT 127.0.0.1
+WARNING 2023-01-27 15:53:50,654 middleware GET /favicon.ico 404 Not Found Emmanuel ALBISSER 127.0.0.1
+WARNING 2023-01-27 15:54:44,355 middleware POST /admin/CRM/contract/13/change/ 302 Found Emmanuel ALBISSER 127.0.0.1
+ERROR 2023-01-27 16:00:17,080 middleware GET /clients/ 500 Internal Server Error <QueryDict: {}> Emmanuel ALBISSER 127.0.0.1
+ERROR 2023-01-27 16:02:37,178 middleware GET /clients/ 500 Internal Server Error <QueryDict: {}> Emmanuel ALBISSER 127.0.0.1
+ERROR 2023-01-27 16:08:14,524 middleware GET /clients/ 500 Internal Server Error <QueryDict: {}> Emmanuel ALBISSER 127.0.0.1
+ERROR 2023-01-27 16:12:20,626 middleware GET /clients/4/ 500 Internal Server Error <QueryDict: {}> Emmanuel ALBISSER 127.0.0.1
+ERROR 2023-01-27 16:14:41,829 middleware GET /contracts/ 500 Internal Server Error <QueryDict: {'client': ['4'], 'ordering': ['']}> Emmanuel ALBISSER 127.0.0.1
+ERROR 2023-01-27 16:15:22,710 middleware GET /contracts/ 500 Internal Server Error <QueryDict: {'client': ['4'], 'ordering': ['']}> Emmanuel ALBISSER 127.0.0.1
+WARNING 2023-01-27 16:36:30,934 middleware GET /clients/ 401 Unauthorized AnonymousUser 127.0.0.1
+WARNING 2023-01-27 16:36:51,742 middleware GET /clients/ 401 Unauthorized AnonymousUser 127.0.0.1
+ERROR 2023-01-27 16:50:29,712 middleware GET /clients/4/ 500 Internal Server Error <QueryDict: {}> Emmanuel ALBISSER 127.0.0.1
+WARNING 2023-01-30 20:09:35,718 middleware GET / 404 Not Found Emmanuel ALBISSER 127.0.0.1
+WARNING 2023-01-30 20:09:36,251 middleware GET /favicon.ico 404 Not Found Emmanuel ALBISSER 127.0.0.1
+WARNING 2023-01-30 20:09:45,613 middleware GET /admin/ 302 Found AnonymousUser 127.0.0.1
+WARNING 2023-01-30 20:09:51,554 middleware POST /admin/login/ 302 Found Emmanuel ALBISSER 127.0.0.1
+WARNING 2023-01-30 20:11:46,052 middleware POST /admin/authentication/crmuser/add/ 302 Found Emmanuel ALBISSER 127.0.0.1
+WARNING 2023-01-30 20:12:21,576 middleware POST /admin/authentication/crmuser/8/change/ 302 Found Emmanuel ALBISSER 127.0.0.1
+WARNING 2023-01-30 20:13:57,955 middleware POST /admin/CRM/client/5/change/ 302 Found Emmanuel ALBISSER 127.0.0.1
+WARNING 2023-01-30 20:22:20,450 middleware POST /clients/ 400 Bad Request Martine SALES 127.0.0.1
+WARNING 2023-01-30 20:26:27,115 middleware PATCH /clients/5/ 403 Forbidden Martine SALES 127.0.0.1
+WARNING 2023-01-30 20:26:42,337 middleware GET /clients/null/ 404 Not Found Martine SALES 127.0.0.1
+WARNING 2023-01-30 20:28:53,587 middleware POST /contracts/ 400 Bad Request Martine SALES 127.0.0.1
+WARNING 2023-01-30 20:30:36,076 middleware POST /contracts/ 400 Bad Request Martine SALES 127.0.0.1
+WARNING 2023-01-30 20:30:48,629 middleware POST /contracts/ 400 Bad Request Martine SALES 127.0.0.1
+WARNING 2023-01-30 20:31:39,476 middleware POST /contracts/ 400 Bad Request Martine SALES 127.0.0.1
+WARNING 2023-01-30 20:38:23,753 middleware POST /admin-tech/auth/group/2/change/ 302 Found Emmanuel ALBISSER 127.0.0.1
+WARNING 2023-01-30 20:38:45,985 middleware POST /admin-tech/auth/group/3/change/ 302 Found Emmanuel ALBISSER 127.0.0.1
+WARNING 2023-01-30 20:52:23,113 middleware POST /contracts/ 400 Bad Request Martine SALES 127.0.0.1
+WARNING 2023-01-30 20:52:39,309 middleware POST /contracts/ 400 Bad Request Martine SALES 127.0.0.1
+WARNING 2023-01-30 20:52:50,515 middleware POST /contracts/ 400 Bad Request Martine SALES 127.0.0.1
+WARNING 2023-01-30 20:56:05,788 middleware POST /contracts/ 400 Bad Request Martine SALES 127.0.0.1
+WARNING 2023-01-30 20:57:41,614 middleware GET /favicon.ico 404 Not Found Emmanuel ALBISSER 127.0.0.1
+ERROR 2023-01-30 21:01:42,893 middleware GET /admin/CRM/event/add/ 500 Internal Server Error <QueryDict: {}> Emmanuel ALBISSER 127.0.0.1
+WARNING 2023-01-31 12:35:34,074 middleware GET / 404 Not Found Emmanuel ALBISSER 127.0.0.1
+WARNING 2023-01-31 12:35:34,424 middleware GET /favicon.ico 404 Not Found Emmanuel ALBISSER 127.0.0.1
+WARNING 2023-01-31 12:41:27,622 middleware POST /admin/CRM/event/44/change/ 302 Found Emmanuel ALBISSER 127.0.0.1
+ERROR 2023-01-31 12:42:00,530 middleware POST /admin/CRM/event/add/ 500 Internal Server Error <QueryDict: {'csrfmiddlewaretoken': ['IdGG6T5nNV20jsPmtvndcTVWr4DnXI6fm5IM9o79gXrwpn8hu5Jgd6RrNZxjTDE4'], 'assignee': [''], 'attendees': [''], 'date': ['2023-01-31'], 'notes': [''], '_save': ['Save']}> Emmanuel ALBISSER 127.0.0.1
+WARNING 2023-01-31 12:45:23,892 middleware POST /admin/CRM/event/44/change/ 302 Found Emmanuel ALBISSER 127.0.0.1
+WARNING 2023-02-01 09:57:13,015 middleware GET /favicon.ico 404 Not Found Emmanuel ALBISSER 127.0.0.1
+WARNING 2023-02-01 10:06:07,245 middleware GET /admin/ 302 Found AnonymousUser 127.0.0.1
+WARNING 2023-02-01 10:06:12,139 middleware POST /admin/login/ 302 Found Emmanuel ALBISSER 127.0.0.1
+WARNING 2023-02-01 10:07:29,590 middleware POST /admin/CRM/client/41/change/ 302 Found Emmanuel ALBISSER 127.0.0.1
+WARNING 2023-02-01 10:11:39,498 middleware GET /clients/ 401 Unauthorized AnonymousUser 127.0.0.1
+WARNING 2023-02-01 10:15:25,358 middleware POST /clients/ 400 Bad Request Martine SALES 127.0.0.1
+WARNING 2023-02-01 10:16:09,810 middleware POST /contracts/ 400 Bad Request Martine SALES 127.0.0.1
+WARNING 2023-02-01 10:18:51,847 middleware PATCH /contracts/46/ 400 Bad Request Martine SALES 127.0.0.1
+WARNING 2023-02-01 10:31:23,582 middleware GET /contracts/ 401 Unauthorized AnonymousUser 127.0.0.1
+WARNING 2023-02-01 10:39:44,620 middleware POST /admin/CRM/client/52/change/ 302 Found Emmanuel ALBISSER 127.0.0.1
+WARNING 2023-02-01 10:43:47,922 middleware GET /contracts/ 400 Bad Request Martine SALES 127.0.0.1
+ERROR 2023-02-01 10:55:51,182 middleware GET /events/ 500 Internal Server Error <QueryDict: {'client_last_name': ['mon client']}> Martine SALES 127.0.0.1
+ERROR 2023-02-01 10:56:30,236 middleware GET /events/ 500 Internal Server Error <QueryDict: {'client_last_name': ['mon client']}> Martine SALES 127.0.0.1
+ERROR 2023-02-01 10:56:54,735 middleware GET /events/ 500 Internal Server Error <QueryDict: {'client_last_name': ['mon client']}> Martine SALES 127.0.0.1
+ERROR 2023-02-01 10:57:54,792 middleware GET /events/ 500 Internal Server Error <QueryDict: {'client_last_name': ['mon client']}> Martine SALES 127.0.0.1
+ERROR 2023-02-01 10:58:13,719 middleware GET /events/ 500 Internal Server Error <QueryDict: {}> Martine SALES 127.0.0.1
+ERROR 2023-02-01 10:59:37,209 middleware GET /events/ 500 Internal Server Error <QueryDict: {'client_last_name': ['mon client']}> Martine SALES 127.0.0.1

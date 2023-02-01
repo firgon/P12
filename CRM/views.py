@@ -64,7 +64,9 @@ class ClientViewSet(GeneralViewSet):
     list_serializer_class = ListClientSerializer
     filter_backends = [filters.OrderingFilter, DjangoFilterBackend]
     filterset_fields = {'assignee': ['exact', 'isnull'],
-                        'company': ['exact']}
+                        'company': ['exact'],
+                        'last_name': ['exact'],
+                        'email': ['exact']}
     permission_classes = [IsAuthenticated,
                           IsRelatedOrReadOnly,
                           DjangoModelPermissions]
@@ -92,7 +94,24 @@ class ContractViewSet(GeneralViewSet):
                           DjangoModelPermissions]
     filterset_fields = {'assignee': ['exact', 'isnull'],
                         'status': ['exact'],
-                        'client': ['exact']}
+                        'client': ['exact'],
+                        'amount': ['exact'],
+                        'payment_due': ['exact']}
+
+    def get_queryset(self):
+        """
+        This view should return a list of all contract
+        filtered by client email or client last_name
+        """
+        queryset = Contract.objects.all()
+
+        client_email = self.request.query_params.get('client_email')
+        client_last_name = self.request.query_params.get('client_last_name')
+        if client_email is not None:
+            queryset = queryset.filter(client__email=client_email)
+        if client_last_name is not None:
+            queryset = queryset.filter(client__last_name=client_last_name)
+        return queryset
 
 
 # class MyContractViewSet(GeneralViewSet):
@@ -117,7 +136,23 @@ class EventViewSet(GeneralViewSet):
                           DjangoModelPermissions]
     filterset_fields = {'assignee': ['exact', 'isnull'],
                         'status': ['exact'],
-                        'contract__client': ['exact']}
+                        'date': ['exact']}
+
+    def get_queryset(self):
+        """
+        This view should return a list of all contract
+        filtered by client email or client last_name
+        """
+        queryset = Event.objects.all()
+
+        client_email = self.request.query_params.get('client_email')
+        client_last_name = self.request.query_params.get('client_last_name')
+        if client_email is not None:
+            queryset = queryset.filter(contract__client__email=client_email)
+        if client_last_name is not None:
+            queryset = queryset.filter(
+                contract__client__last_name=client_last_name)
+        return queryset
 
 
 
