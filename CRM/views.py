@@ -140,8 +140,8 @@ class EventViewSet(GeneralViewSet):
 
     def get_queryset(self):
         """
-        This view should return a list of all contract
-        filtered by client email or client last_name
+        This view should return a list of all event
+        filtered by client email or/and client last_name
         """
         queryset = Event.objects.all()
 
